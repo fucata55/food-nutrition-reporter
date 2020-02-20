@@ -17,6 +17,7 @@ export class Nutrient {
 			case 'mg':
 				this.amount = o.amount / 1000;
 				this.unit = 'g';
+				break;
 			default:
 				this.amount = o.amount;
 				this.unit = o.nutrient.unitName;
