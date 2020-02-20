@@ -20,7 +20,7 @@ export class NutritionDetailPage implements OnInit {
         first(),
         flatMap(foodId => this._getFoodDetail(+foodId)),
       )
-      .subscribe(res => this.content = res)
+      .subscribe()
   }
 
   private _getQuery(): Observable<string> {
@@ -30,10 +30,13 @@ export class NutritionDetailPage implements OnInit {
       )
   }
 
-  private _getFoodDetail(foodId: number) {
+  private _getFoodDetail(foodId: number): Observable<void> {
     return this._foodService.getDetail(foodId)
       .pipe(
-        map(res => res)
+        map(res => {
+          const jsonString = this._foodService.storage.getItem('foodDetail');
+          this.content = new FoodDetail(JSON.parse(jsonString));
+        })
       )
   }
 }

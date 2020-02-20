@@ -16,18 +16,16 @@ export class SearchPage implements OnInit {
 	ngOnInit() { }
 
 	public handleSearchResultClick(food: IFood): void {
-		console.log(food.fdcId)
 		this._router.navigate(['/nutrition-detail'], { queryParams: { foodId: food.fdcId } });
 	}
 
-	public handleSearchInput($event): void {
-		console.log('event is', $event.target.value);
+	public handleSearchInput($event: any): void {
 		const query = $event.target.value || ''
 		this._foodService.search(query)
 			.pipe(first())
-			.subscribe(res => {
-				console.log(res)
-				this.searchResult = res;
+			.subscribe(() => {
+				const jsonString = this._foodService.storage.getItem('searchResult');
+				this.searchResult = new SearchResult(JSON.parse(jsonString));
 			});
 	}
 }
