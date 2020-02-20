@@ -5,5 +5,31 @@
 </ion-header>
 
 <ion-content>
-
+  <ion-grid *ngIf="content">
+    <ion-row>
+      {{ content.name }}
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Name
+      </ion-col>
+      <ion-col>
+        Amount
+      </ion-col>
+      <ion-col>
+        unit
+      </ion-col>
+    </ion-row>
+    <ion-row *ngFor="let nutrient of content.nutrients">
+      <ion-col>
+        {{ nutrient.name }}
+      </ion-col>
+      <ion-col>
+        {{ nutrient.amount }}
+      </ion-col>
+      <ion-col>
+        {{ nutrient.unit }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
