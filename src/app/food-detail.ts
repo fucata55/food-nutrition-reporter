@@ -13,8 +13,14 @@ export class Nutrient {
 	public unit: string;
 	constructor(o: INutrient) {
 		this.name = o.nutrient.name;
-		this.amount = o.amount;
-		this.unit = o.nutrient.unitName;
+		switch (o.nutrient.unitName) {
+			case 'mg':
+				this.amount = o.amount / 1000;
+				this.unit = 'g';
+			default:
+				this.amount = o.amount;
+				this.unit = o.nutrient.unitName;
+		}
 	}
 }
 
